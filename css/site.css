@@ -1275,12 +1275,56 @@ img { max-width: 100%; height: auto; display: block; }
 .program.reverse { padding-right: 0; padding-left: var(--bleed-pad); }
 .program-body { max-width: 60ch; margin-inline: auto; }
 
-/* Centered intros, hero & CTA (block centered, text left-aligned) */
-.module-head { max-width: 880px; margin-inline: auto; }
+/* Two-column section headers: main title left, description right.
+   Applied to module heads that have a description, interior page
+   headers, and the hero. Title-only module heads stay single-column. */
+.module-head { max-width: none; margin-inline: 0; }
 .module-head .module-title { max-width: 100%; }
-.hero > .container { max-width: 1280px; }
-.page-header > .container { max-width: 1140px; }
-.cta-band > .container { max-width: 1140px; }
+
+.module-head:has(.module-deck) {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  column-gap: clamp(40px, 6vw, 120px);
+  grid-template-areas:
+    "eyebrow eyebrow"
+    "title   deck";
+  align-items: start;
+}
+.module-head:has(.module-deck) .module-eyebrow { grid-area: eyebrow; }
+.module-head:has(.module-deck) .module-title { grid-area: title; margin-bottom: 0; }
+.module-head:has(.module-deck) .module-deck { grid-area: deck; max-width: 52ch; margin: 0; }
+
+.page-header > .container {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  column-gap: clamp(40px, 6vw, 120px);
+  grid-template-areas:
+    "meta  meta"
+    "title subtitle";
+  align-items: start;
+}
+.page-header-meta { grid-area: meta; }
+.page-header-title { grid-area: title; max-width: 100%; margin-bottom: 0; }
+.page-header-subtitle { grid-area: subtitle; max-width: 52ch; }
+
+.hero > .container {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  column-gap: clamp(40px, 5vw, 96px);
+  row-gap: clamp(32px, 4vw, 56px);
+  grid-template-areas:
+    "eyebrow eyebrow"
+    "title   deck"
+    "meta    meta"
+    "ctas    ctas";
+  align-items: start;
+}
+.hero-eyebrow { grid-area: eyebrow; margin: 0; }
+.hero-title { grid-area: title; max-width: 100%; margin: 0; }
+.hero-deck { grid-area: deck; max-width: 52ch; margin: 0; }
+.hero-meta { grid-area: meta; margin: 0; }
+.hero-ctas { grid-area: ctas; }
+
 .hero-photo .hero-photo-cap { left: var(--bleed-pad); }
 
 /* Image hover polish */
@@ -1302,6 +1346,14 @@ img { max-width: 100%; height: auto; display: block; }
     grid-template-columns: minmax(0, 1fr);
     justify-content: stretch;
   }
+
+  /* Stack two-column headers */
+  .module-head:has(.module-deck),
+  .page-header > .container,
+  .hero > .container { display: block; }
+  .module-head:has(.module-deck) .module-title,
+  .page-header-title { margin-bottom: 24px; }
+  .hero > .container > * { margin-bottom: 32px; }
 }
 
 /* ================================================================
