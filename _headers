@@ -10,12 +10,16 @@
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
 
-# Long cache for static assets (images + CSS) — content-hashed in filename so safe to cache hard
+# Long cache for images — replace with a new filename when swapping art
 /images/*
   Cache-Control: public, max-age=31536000, immutable
 
+# CSS/JS are not content-hashed, so revalidate often to ensure updates ship
 /css/*
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=300, must-revalidate
+
+/js/*
+  Cache-Control: public, max-age=300, must-revalidate
 
 # Short cache for HTML so content updates appear fast
 /*.html

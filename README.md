@@ -17,6 +17,7 @@ Static HTML/CSS site. No build step. No JavaScript framework. Ready to deploy as
 ├── path.html               Acquisition & Development Path
 ├── partnership.html        The Partnership
 ├── css/site.css            Shared stylesheet (design system)
+├── js/reveal.js            Scroll-reveal animations (progressive enhancement)
 ├── images/                 8 figures (brewhouse, master plans, estuary map, etc.)
 ├── _headers                Cloudflare Pages: security headers, cache rules, noindex
 ├── _redirects              Cloudflare Pages: clean URLs (/summary instead of /summary.html)
