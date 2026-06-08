@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tumwater Brewery — An Exclusive Acquisition Opportunity | AGM Real Estate Group</title>
 <link rel="stylesheet" href="css/site.css?v=2">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 <meta name="description" content="A 34-acre heritage riverfront site on the Deschutes River, offered first to a select group of sovereign Pacific Northwest nations.">
 <meta property="og:title" content="Tumwater Brewery — An Exclusive Acquisition Opportunity">
@@ -64,10 +65,10 @@
     </div>
   </div>
 
-  <!-- Full-bleed brewhouse photo -->
-  <div class="hero-photo">
-    <img src="images/hero_brewhouse.jpg" alt="The 1906 Olympia Brewhouse — drone view from the east">
-    <div class="hero-photo-cap">The 1906 Brewhouse &middot; Parcel B</div>
+  <!-- Interactive 3D site map (replaces the hero photo) -->
+  <div class="hero-map-wrap">
+    <div class="hero-map" id="site-map" role="application" aria-label="Interactive 3D map of the Tumwater Brewery site"></div>
+    <div class="hero-map-hint">Drag to rotate &middot; tap a marker for detail &middot; <em>locations approximate</em></div>
   </div>
 </header>
 
@@ -248,5 +249,7 @@
 </footer>
 
 <script src="js/reveal.js?v=2" defer></script>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js" defer></script>
+<script src="js/site-map.js?v=1" defer></script>
 </body>
 </html>

@@ -1404,3 +1404,77 @@ img { max-width: 100%; height: auto; display: block; }
   body { background: #FFFFFF; }
   .section { page-break-inside: avoid; padding: 60px 0; }
 }
+
+/* ================================================================
+   INTERACTIVE 3D SITE MAP  (home hero)
+   ================================================================ */
+.hero-map-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+.hero-map {
+  width: 100%;
+  height: min(72vh, 720px);
+  background: #0A2540 url("../images/hero_brewhouse.jpg") center / cover no-repeat;
+}
+.hero-map-hint {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  background: rgba(10, 37, 64, 0.82);
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 9px 16px;
+  pointer-events: none;
+}
+.hero-map-hint em {
+  font-style: italic;
+  color: var(--blue);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* MapLibre popups — branded */
+.maplibregl-popup-content {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  padding: 20px 22px 22px;
+  border-radius: 0;
+  border-top: 2px solid var(--blue);
+  box-shadow: 0 8px 40px rgba(10, 37, 64, 0.18);
+}
+.map-pop-tag {
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin: 0 0 8px;
+}
+.map-pop-title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--navy);
+  margin: 0 0 10px;
+}
+.map-pop-body {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0;
+}
+.maplibregl-popup-close-button {
+  font-size: 18px;
+  color: var(--text-faint);
+  padding: 2px 8px;
+}
+@media (max-width: 700px) {
+  .hero-map { height: 60vh; }
+}
