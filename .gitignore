@@ -30,3 +30,6 @@ yarn-debug.log*
 # Misc
 .history/
 .tmp/
+
+# Content exports (deliverables, not part of the deployed site)
+Tumwater_Brewery_Content.md
