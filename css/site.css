@@ -1214,8 +1214,12 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 /* ================================================================
-   FULL-BLEED LAYOUTS  (edge-to-edge grids & imagery; inner content
-   stays aligned to the page gutter via --bleed-pad)
+   FULL-BLEED LAYOUT + CENTERED CONTENT
+   Grids and imagery span the full viewport. Inside each full-width
+   cell the content is capped to a readable measure and CENTERED as a
+   block, while the text itself stays left-aligned — so it reads as an
+   intentional centered column, not text hugging one edge. Applied
+   site-wide (hero, section intros, cells, stat band, CTA).
    ================================================================ */
 
 /* Break out of the centered shell to span the full viewport width */
@@ -1231,35 +1235,52 @@ img { max-width: 100%; height: auto; display: block; }
   margin-right: calc(50% - 50vw);
 }
 
-/* --- Card grids: 2 columns, multiple rows --- */
-.case-grid, .team-grid { --pad-in: clamp(32px, 4vw, 72px); --pad-out: var(--bleed-pad); }
-.case-card, .team-card { padding-left: var(--pad-in); padding-right: var(--pad-in); }
-.case-card:nth-child(odd),  .team-card:nth-child(odd)  { padding-left: var(--pad-out); }
-.case-card:nth-child(even), .team-card:nth-child(even) { padding-right: var(--pad-out); }
+/* Center the content block within each full-width cell.
+   A single centered grid track caps the measure and centers it; the
+   children keep their own vertical margins and left-aligned text. */
+.case-card,
+.team-card,
+.split-side,
+.step,
+.comp-head > div,
+.comp-row > div {
+  display: grid;
+  grid-template-columns: minmax(0, var(--cell-measure, 60ch));
+  justify-content: center;
+  align-content: start;
+}
+.case-card, .team-card { --cell-measure: 62ch; }
+.split-side { --cell-measure: 58ch; }
+.step { --cell-measure: 34ch; }
+.comp-head > div, .comp-row > div { --cell-measure: 52ch; }
 
-/* --- Split: 2 columns, single row --- */
-.split { --pad-in: clamp(36px, 4vw, 72px); --pad-out: var(--bleed-pad); }
-.split-side { padding-left: var(--pad-in); padding-right: var(--pad-in); }
-.split-side:first-child { padding-left: var(--pad-out); }
-.split-side:last-child  { padding-right: var(--pad-out); }
+/* Stat band — center each stat as a block */
+.stat-marquee .stat {
+  display: grid;
+  grid-template-columns: minmax(0, 24ch);
+  justify-content: center;
+  align-content: start;
+  row-gap: 6px;
+}
 
-/* --- Process steps: 5 columns --- */
-.steps { --pad-in: clamp(24px, 2vw, 36px); --pad-out: var(--bleed-pad); }
-.step { padding-left: var(--pad-in); padding-right: var(--pad-in); }
-.step:first-child { padding-left: var(--pad-out); }
-.step:last-child  { padding-right: var(--pad-out); }
+/* Reference card — center its content block */
+.ref-card {
+  display: grid;
+  grid-template-columns: minmax(0, 900px);
+  justify-content: center;
+}
 
-/* --- Comparison table: 3 columns --- */
-.comp-table { --pad-in: clamp(24px, 2.4vw, 40px); --pad-out: var(--bleed-pad); }
-.comp-head > div, .comp-row > div { padding-left: var(--pad-in); padding-right: var(--pad-in); }
-.comp-head > div:first-child, .comp-row > div:first-child { padding-left: var(--pad-out); }
-.comp-head > div:last-child,  .comp-row > div:last-child  { padding-right: var(--pad-out); }
-
-/* --- Program splits: image bleeds to the outer edge, text holds the gutter --- */
+/* Program splits — image bleeds to the outer edge; text block centers in its column */
 .program { padding-right: var(--bleed-pad); }
 .program.reverse { padding-right: 0; padding-left: var(--bleed-pad); }
+.program-body { max-width: 60ch; margin-inline: auto; }
 
-/* --- Hero photo: align caption to the gutter when edge-to-edge --- */
+/* Centered intros, hero & CTA (block centered, text left-aligned) */
+.module-head { max-width: 880px; margin-inline: auto; }
+.module-head .module-title { max-width: 100%; }
+.hero > .container { max-width: 1280px; }
+.page-header > .container { max-width: 1140px; }
+.cta-band > .container { max-width: 1140px; }
 .hero-photo .hero-photo-cap { left: var(--bleed-pad); }
 
 /* Image hover polish */
@@ -1268,15 +1289,19 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .program-image:hover img, .figure-frame:hover img { transform: scale(1.03); }
 
-/* Mobile: single column, symmetric padding, no breakout */
+/* Mobile: single column, fill the width, no breakout */
 @media (max-width: 900px) {
   .case-grid, .team-grid, .split, .comp-table, .steps, .program {
     width: auto;
     margin-left: 0;
     margin-right: 0;
   }
-  .case-grid, .team-grid, .split, .steps, .comp-table { --pad-out: var(--pad-in); }
   .program, .program.reverse { padding-left: 0; padding-right: 0; }
+  .case-card, .team-card, .split-side, .step,
+  .comp-head > div, .comp-row > div, .ref-card {
+    grid-template-columns: minmax(0, 1fr);
+    justify-content: stretch;
+  }
 }
 
 /* ================================================================
