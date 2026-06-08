@@ -12,8 +12,8 @@
   --blue-tint-2: rgba(58, 141, 222, 0.08);
   --paper: #FBFAF7;
   --paper-warm: #FBFAF7;
-  --border: rgba(10, 37, 64, 0.12);
-  --border-strong: rgba(10, 37, 64, 0.22);
+  --border: rgba(10, 37, 64, 0.09);
+  --border-strong: rgba(10, 37, 64, 0.16);
   --text-muted: rgba(10, 37, 64, 0.72);
   --text-faint: rgba(10, 37, 64, 0.55);
   --shadow-card: 0 2px 24px rgba(10, 37, 64, 0.06);
@@ -411,8 +411,6 @@ img { max-width: 100%; height: auto; display: block; }
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  border-top: 1px solid var(--navy);
-  border-bottom: 1px solid var(--navy);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   background: var(--paper);
@@ -686,8 +684,9 @@ img { max-width: 100%; height: auto; display: block; }
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 0;
-  margin-top: 56px;
-  border-top: 1px solid var(--navy);
+  margin-top: clamp(40px, 4vw, 56px);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 .step {
   padding: clamp(32px, 2.6vw, 48px) clamp(24px, 2vw, 36px) clamp(36px, 3vw, 52px);
@@ -790,8 +789,6 @@ img { max-width: 100%; height: auto; display: block; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0;
-  border-top: 1px solid var(--navy);
-  border-bottom: 1px solid var(--navy);
   margin: clamp(32px, 4vw, 48px) 0;
 }
 .split-side {
@@ -834,15 +831,15 @@ img { max-width: 100%; height: auto; display: block; }
    ================================================================ */
 
 .comp-table {
-  border-top: 1px solid var(--navy);
-  border-bottom: 1px solid var(--navy);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   margin: 40px 0 56px;
 }
 .comp-head {
   display: grid;
   grid-template-columns: 1.1fr 1.3fr 1.3fr;
   background: var(--paper-warm);
-  border-bottom: 1px solid var(--navy);
+  border-bottom: 1px solid var(--border);
 }
 .comp-head > div {
   padding: 22px 28px;
@@ -911,8 +908,8 @@ img { max-width: 100%; height: auto; display: block; }
 .parcel-table thead th {
   text-align: left;
   padding: 18px 20px 18px 0;
-  border-top: 1px solid var(--navy);
-  border-bottom: 1px solid var(--navy);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   font-size: 11px;
   font-weight: 500;
   color: var(--blue);
@@ -926,7 +923,7 @@ img { max-width: 100%; height: auto; display: block; }
   vertical-align: top;
 }
 .parcel-table tbody tr:last-child td {
-  border-bottom: 1px solid var(--navy);
+  border-bottom: 1px solid var(--border);
   font-weight: 500;
 }
 .parcel-table td.muted { color: var(--text-muted); }
@@ -941,8 +938,8 @@ img { max-width: 100%; height: auto; display: block; }
   padding: clamp(44px, 5vw, 88px) clamp(36px, 5vw, 88px) clamp(52px, 5.5vw, 96px);
   margin: clamp(28px, 3.5vw, 48px) 0;
   position: relative;
-  border-top: 1px solid var(--navy);
-  border-bottom: 1px solid var(--navy);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 .ref-card-tag {
   display: inline-block;
@@ -1075,7 +1072,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 .page-nav {
   background: var(--paper-warm);
-  border-top: 1px solid var(--navy);
+  border-top: 1px solid var(--border);
   padding: 56px 0;
 }
 .page-nav-inner {
@@ -1094,7 +1091,7 @@ img { max-width: 100%; height: auto; display: block; }
   transition: all 0.25s ease;
 }
 .page-nav-link:hover {
-  border-color: var(--navy);
+  border-color: var(--border-strong);
   background: #FFFFFF;
 }
 .page-nav-link .dir {
