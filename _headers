@@ -1,0 +1,22 @@
+# Cloudflare Pages headers config
+# Format: https://developers.cloudflare.com/pages/configuration/headers/
+
+# Global security headers + noindex (confidential pre-market materials)
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+
+# Long cache for static assets (images + CSS) — content-hashed in filename so safe to cache hard
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Short cache for HTML so content updates appear fast
+/*.html
+  Cache-Control: public, max-age=300, must-revalidate

@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /
+
+# Confidential pre-market acquisition materials.
+# Not intended for public discovery or indexing.

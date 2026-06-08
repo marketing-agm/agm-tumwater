@@ -1,0 +1,11 @@
+# Cloudflare Pages redirects
+# Format: https://developers.cloudflare.com/pages/configuration/redirects/
+#
+# Note: Cloudflare Pages handles clean URLs automatically.
+# A request to /summary resolves to /summary.html with no config needed.
+# Do NOT add rewrite rules like "/summary  /summary.html  200" — they
+# conflict with the auto-canonicalization and cause redirect loops.
+
+# Legacy / typo handlers
+/home          /                  301
+/contact       /partnership       301
