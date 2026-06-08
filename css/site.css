@@ -21,6 +21,9 @@
   /* Layout shell — fluid full-width with generous, screen-scaled gutters */
   --shell: 1880px;
   --gutter: clamp(22px, 4.8vw, 112px);
+  /* Inner padding for full-bleed (100vw) blocks so their content stays
+     aligned to the same edge as .container at any viewport width. */
+  --bleed-pad: max(var(--gutter), calc((100vw - var(--shell)) / 2 + var(--gutter)));
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -1208,6 +1211,72 @@ img { max-width: 100%; height: auto; display: block; }
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
+}
+
+/* ================================================================
+   FULL-BLEED LAYOUTS  (edge-to-edge grids & imagery; inner content
+   stays aligned to the page gutter via --bleed-pad)
+   ================================================================ */
+
+/* Break out of the centered shell to span the full viewport width */
+.case-grid,
+.team-grid,
+.split,
+.comp-table,
+.steps,
+.program,
+.hero-photo {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* --- Card grids: 2 columns, multiple rows --- */
+.case-grid, .team-grid { --pad-in: clamp(32px, 4vw, 72px); --pad-out: var(--bleed-pad); }
+.case-card, .team-card { padding-left: var(--pad-in); padding-right: var(--pad-in); }
+.case-card:nth-child(odd),  .team-card:nth-child(odd)  { padding-left: var(--pad-out); }
+.case-card:nth-child(even), .team-card:nth-child(even) { padding-right: var(--pad-out); }
+
+/* --- Split: 2 columns, single row --- */
+.split { --pad-in: clamp(36px, 4vw, 72px); --pad-out: var(--bleed-pad); }
+.split-side { padding-left: var(--pad-in); padding-right: var(--pad-in); }
+.split-side:first-child { padding-left: var(--pad-out); }
+.split-side:last-child  { padding-right: var(--pad-out); }
+
+/* --- Process steps: 5 columns --- */
+.steps { --pad-in: clamp(24px, 2vw, 36px); --pad-out: var(--bleed-pad); }
+.step { padding-left: var(--pad-in); padding-right: var(--pad-in); }
+.step:first-child { padding-left: var(--pad-out); }
+.step:last-child  { padding-right: var(--pad-out); }
+
+/* --- Comparison table: 3 columns --- */
+.comp-table { --pad-in: clamp(24px, 2.4vw, 40px); --pad-out: var(--bleed-pad); }
+.comp-head > div, .comp-row > div { padding-left: var(--pad-in); padding-right: var(--pad-in); }
+.comp-head > div:first-child, .comp-row > div:first-child { padding-left: var(--pad-out); }
+.comp-head > div:last-child,  .comp-row > div:last-child  { padding-right: var(--pad-out); }
+
+/* --- Program splits: image bleeds to the outer edge, text holds the gutter --- */
+.program { padding-right: var(--bleed-pad); }
+.program.reverse { padding-right: 0; padding-left: var(--bleed-pad); }
+
+/* --- Hero photo: align caption to the gutter when edge-to-edge --- */
+.hero-photo .hero-photo-cap { left: var(--bleed-pad); }
+
+/* Image hover polish */
+.program-image img, .figure-frame img {
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.program-image:hover img, .figure-frame:hover img { transform: scale(1.03); }
+
+/* Mobile: single column, symmetric padding, no breakout */
+@media (max-width: 900px) {
+  .case-grid, .team-grid, .split, .comp-table, .steps, .program {
+    width: auto;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .case-grid, .team-grid, .split, .steps, .comp-table { --pad-out: var(--pad-in); }
+  .program, .program.reverse { padding-left: 0; padding-right: 0; }
 }
 
 /* ================================================================
